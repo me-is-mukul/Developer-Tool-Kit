@@ -16,7 +16,7 @@ echo -e "${BLUE}============================================================${NC
 echo -e "${MAGENTA}         💻  Environment Setup (Auto Venv)  💻${NC}\n"
 
 echo -e "${BLUE}------------------------------------------------------------"
-echo -e "[1/8] Checking Python, pip, and venv"
+echo -e "                Checking Python, pip, and venv"
 echo -e "------------------------------------------------------------${NC}"
 
 if ! command -v python3 >/dev/null 2>&1; then
@@ -44,7 +44,7 @@ sudo apt install -y python${PY_VER}-venv >/dev/null 2>&1
 echo -e "${GREEN}✔ python${PY_VER}-venv ready${NC}"
 
 echo -e "\n${BLUE}------------------------------------------------------------"
-echo -e "[2/8] Creating Virtual Environment in Current Directory"
+echo -e "       Creating Virtual Environment in Current Directory"
 echo -e "------------------------------------------------------------${NC}"
 
 VENV_PATH="./venv"
@@ -71,7 +71,7 @@ echo -e "${CYAN}→ Upgrading pip inside venv...${NC}"
 pip install --upgrade pip
 
 echo -e "\n${BLUE}------------------------------------------------------------"
-echo -e "[3/8] Machine Learning Libraries"
+echo -e "                Machine Learning Libraries"
 echo -e "------------------------------------------------------------${NC}"
 
 read -p "$(echo -e "${WHITE}Install core ML libraries? (numpy, pandas, sklearn) [Y/n]: ${NC}")" ML
