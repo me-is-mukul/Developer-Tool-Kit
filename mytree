@@ -1,19 +1,15 @@
 #!/bin/bash
 
 DIR="$(pwd)"
+HOME_DIR="$HOME"
+USERNAME="$(basename "$HOME_DIR")"
 
-# Colors
 BLUE="\e[34m"
 CYAN="\e[36m"
-YELLOW="\e[33m"
-GREEN="\e[32m"
 MAGENTA="\e[35m"
+GREEN="\e[32m"
 BOLD="\e[1m"
 RESET="\e[0m"
-
-# Highlight Root Directory
-ROOT_NAME="$(basename "$DIR")"
-echo -e "${BOLD}${GREEN}📁 $ROOT_NAME  ${MAGENTA}(You are here)${RESET}"
 
 print_tree() {
     local path="$1"
@@ -34,16 +30,36 @@ print_tree() {
             new_prefix="$prefix│   "
         fi
 
-        # Subdirectories
         if [[ -d "$entry" ]]; then
             echo -e "${prefix}${branch} ${BLUE}📁 ${BOLD}$(basename "$entry")${RESET}"
-            print_tree "$entry" "$new_prefix"
-
-        # Files
         elif [[ -f "$entry" ]]; then
             echo -e "${prefix}${branch} ${CYAN}📄 $(basename "$entry")${RESET}"
         fi
     done
 }
 
-print_tree "$DIR" ""
+REL_PATH="${DIR#$HOME_DIR/}"
+
+if [[ "$DIR" == "$HOME_DIR" ]]; then
+    echo -e "${GREEN}${BOLD}$USERNAME${MAGENTA} (You are here)${RESET}"
+    prefix="    "  
+else
+    echo -e "${GREEN}${BOLD}$USERNAME${RESET}"
+
+    IFS='/' read -ra PARTS <<< "$REL_PATH"
+    prefix=""
+
+    for ((i=0; i<${#PARTS[@]}; i++)); do
+        part="${PARTS[i]}"
+
+        if [[ $i -eq $((${#PARTS[@]} - 1)) ]]; then
+            echo -e "${prefix}└── ${MAGENTA}${BOLD}$part (You are here)${RESET}"
+            prefix="$prefix    "
+        else
+            echo -e "${prefix}├── ${BLUE}$part${RESET}"
+            prefix="$prefix│   "
+        fi
+    done
+fi
+
+print_tree "$DIR" "$prefix"
