@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# ========================= COLORS ==========================
 NC="\033[0m"
 RED="\033[38;5;203m"
 GREEN="\033[38;5;114m"
@@ -16,7 +15,6 @@ echo -e "${CYAN}         MACHINE LEARNING DEVELOPMENT KIT${NC}"
 echo -e "${BLUE}============================================================${NC}"
 echo -e "${MAGENTA}         💻  Environment Setup (Auto Venv)  💻${NC}\n"
 
-# ========================= PYTHON CHECK ==========================
 echo -e "${BLUE}------------------------------------------------------------"
 echo -e "[1/8] Checking Python, pip, and venv"
 echo -e "------------------------------------------------------------${NC}"
@@ -45,7 +43,6 @@ PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_i
 sudo apt install -y python${PY_VER}-venv >/dev/null 2>&1
 echo -e "${GREEN}✔ python${PY_VER}-venv ready${NC}"
 
-# =========================== VENV ===============================
 echo -e "\n${BLUE}------------------------------------------------------------"
 echo -e "[2/8] Creating Virtual Environment in Current Directory"
 echo -e "------------------------------------------------------------${NC}"
@@ -73,7 +70,6 @@ source "$VENV_PATH/bin/activate" || {
 echo -e "${CYAN}→ Upgrading pip inside venv...${NC}"
 pip install --upgrade pip
 
-# ======================== ML LIBRARIES ===========================
 echo -e "\n${BLUE}------------------------------------------------------------"
 echo -e "[3/8] Machine Learning Libraries"
 echo -e "------------------------------------------------------------${NC}"
@@ -88,7 +84,6 @@ if [[ "$ML" =~ ^[Yy]$ || -z "$ML" ]]; then
     echo -e "${GREEN}✔ ML libraries installed.${NC}"
 fi
 
-# ====================== JUPYTER ===============================
 read -p "$(echo -e "${WHITE}Install Jupyter Notebook & Lab? [Y/n]: ${NC}")" JP
 if [[ "$JP" =~ ^[Yy]$ || -z "$JP" ]]; then
     echo -e "${CYAN}→ Installing Jupyter...${NC}"
@@ -99,14 +94,12 @@ if [[ "$JP" =~ ^[Yy]$ || -z "$JP" ]]; then
     echo -e "${GREEN}✔ Jupyter installed.${NC}"
 fi
 
-# ========================== GIT ================================
 read -p "$(echo -e "${WHITE}Install Git? [Y/n]: ${NC}")" GT
 if [[ "$GT" =~ ^[Yy]$ || -z "$GT" ]]; then
     sudo apt install -y git
     echo -e "${GREEN}✔ Git installed.${NC}"
 fi
 
-# ========================== VS CODE ============================
 read -p "$(echo -e "${WHITE}Install Visual Studio Code? [Y/n]: ${NC}")" VC
 if [[ "$VC" =~ ^[Yy]$ || -z "$VC" ]]; then
     echo -e "${CYAN}→ Installing VS Code...${NC}"
@@ -121,7 +114,6 @@ if [[ "$VC" =~ ^[Yy]$ || -z "$VC" ]]; then
     echo -e "${GREEN}✔ VS Code installed.${NC}"
 fi
 
-# ========================= FINISH ==============================
 echo -e "\n${GREEN}============================================================"
 echo -e "           Setup Completed Successfully!"
 echo -e "============================================================${NC}\n"

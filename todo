@@ -48,13 +48,11 @@ cmd_display() {
 
     list_data=()
 
-    # Read only non-empty lines, skip blank ones
     while IFS='|' read -r seq msg status; do
         [[ -z "$seq" ]] && continue
         list_data+=("$seq" "$msg" "$status")
     done < <(grep . "$TODO_FILE")
 
-    # If array empty after filtering
     if [[ ${#list_data[@]} -eq 0 ]]; then
         zenity --info --text="Your todo list is empty!" --title="Todo List"
         exit 0
